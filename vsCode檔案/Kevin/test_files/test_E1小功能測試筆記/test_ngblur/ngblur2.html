@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Validation</title>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+
+    <form id="myForm">
+        <label for="animalHealth">Animal Health:</label>
+        <input id="animalHealth" type="text" name="addAnimalHealth" 
+               ng-model="animalHealth" ng-blur="checkInput('animalHealth')" class="needcheck">
+        <br><br>
+
+        <label for="otherField">Other Field:</label>
+        <textarea id="otherField" name="otherField" 
+                  ng-model="otherField" ng-blur="checkInput('otherField')" class="needcheck"></textarea>
+        <br><br>
+
+        <button type="submit">提交</button>
+    </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myApp', []);
+
+        app.controller('myCtrl', ['$scope', function($scope) {
+            $scope.checkInput = function(fieldName) {
+                if (!$scope[fieldName] || $scope[fieldName].trim() === '') {
+                    $scope[fieldName] = '未輸入字詞';
+                }
+            };
+        }]);
+    </script>
+</body>
+</html>

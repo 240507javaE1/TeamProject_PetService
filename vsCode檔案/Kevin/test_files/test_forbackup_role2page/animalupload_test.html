@@ -1,0 +1,391 @@
+<!DOCTYPE html><html>
+<head>
+<meta charset="utf-8">  <title>上傳動物資訊供領認養_test</title>
+<!--來自Jack首頁header/footer可能需要的東西，theme先暫時不處理-->
+<!--<script src="./themeFormJack.js"></script>-->
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+<link rel="stylesheet" href="assets/css/swiper-icons.css">
+<link rel="stylesheet" href="assets/css/aos.min.css">
+<link rel="stylesheet" href="assets/css/animate.min.css">
+<link rel="stylesheet" href="assets/css/Simple-Slider-swiper-bundle.min.css">
+<link rel="stylesheet" href="assets/css/Simple-Slider.css">
+<link rel="stylesheet" href="assets/css/Team-Horizontal-icons.css">
+<link rel="stylesheet" href="assets/css/Team-Horizontal-images.css">
+<!--老師有教到的4個bootstrap+1個angular.js-->
+<script src="https://cdn.staticfile.org/angular.js/1.8.2/angular.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!--我自己分離化的javascript，&可能額外需要的東西-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/css/pikaday.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/pikaday.min.js"></script>
+<script src="./animalupload_test.js"></script>
+<link rel="stylesheet" href="styleMilkCoffee.css">
+</head>
+<body ng-app="myApp" ng-controller="myCtrl_preSet">
+<!--網頁首先是來自Jack首頁的header-->
+<nav class="navbar navbar-expand-md fixed-top navbar-shrink py-3" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="index.html"><span>TailoredPaws 量身爪印</span></a>
+    <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+    <div class="theme-switcher dropdown">
+      <a class="dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-sun-fill mb-1" style="font-size: 30px;">
+          <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
+      </svg></a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item d-flex align-items-center" href="#" data-bs-theme-value="light">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-sun-fill opacity-50 me-2">
+            <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
+        </svg>Light</a>
+        <a class="dropdown-item d-flex align-items-center" href="#" data-bs-theme-value="dark">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-moon-stars-fill opacity-50 me-2">
+            <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278"></path>
+            <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"></path>
+        </svg>Dark</a>
+        <a class="dropdown-item d-flex align-items-center" href="#" data-bs-theme-value="auto">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-circle-half opacity-50 me-2">
+            <path d="M8 15A7 7 0 1 0 8 1zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16"></path>
+        </svg>Auto</a>
+    </div></div>
+    <div class="collapse navbar-collapse pe-xxl-0 ps-xxl-0 ms-xxl-0 me-xxl-0" id="navcol-1">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"></li>
+        <li class="nav-item"><a class="nav-link" href="features.html">寵物服務</a></li>
+        <li class="nav-item"><a class="nav-link" href="integrations.html">成為小幫手</a></li>
+        <li class="nav-item"><a class="nav-link" href="pricing.html">領養/送養</a></li>
+        <li class="nav-item"><a class="nav-link" href="contacts.html">聯絡我們</a></li>
+      </ul>
+      <div class="dropdown"><a class="dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" href="#"><strong>訪客</strong></a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">First Item</a>
+          <a class="dropdown-item" href="#">Second Item</a>
+          <a class="dropdown-item" href="#">Third Item</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav><header class="pt-5"></header><header class="pt-5"></header>
+<!--上面是來自Jack首頁的header-->
+<!--下面是上傳一個動物的表單-->
+<div class="container mt-5" ng-controller="myCtrl_animaladd">
+  <h2 class="mb-4">上傳/修改動物資訊供送養</h2>
+  <form id="addForm" ng-submit="addAnimal()">
+    <div class="row mb-4">
+      <div class="col-2">
+        <label for="animalLocate">動物所在地:</label>
+        <select id="animalLocate" ng-model="addAnimalLocation" ng-options="x for (x,y) in citylist" class="form-control" required></select>
+      </div>
+      <div class="col-2">
+        <label for="animalName">動物名稱：(非必填)</label>
+        <input id="animalName" type="text" name="addAnimalName" onblur="checkInput()"/>
+      </div>
+      <div class="col-2">
+        <label for="animalChipID">動物晶片ID：(非必填)</label>
+        <input id="animalChipID" type="text" name="addAnimalChipID" onblur="checkInput()"/>
+      </div>
+      <div class="col-2">
+        <label for="animalGender">動物性別：</label>
+        <select id="animalGender" ng-model="addAnimalGender" ng-options="x for x in animalGenderlist" class="form-control" required></select>
+      </div>
+      <div class="col-2">
+        <label for="animalType">動物種類：</label>
+        <select id="animalType" ng-model="addAnimalType" ng-options="x for x in animalTypelist" class="form-control" required></select>
+      </div>
+      <div class="col-2">
+        <label for="animalSize">動物體型：</label>
+        <select id="animalSize" ng-model="addAnimalSize" ng-options="x for x in animalSizelist" class="form-control" required></select>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-2">
+        <label for="animalPhoto">動物照片：</label>
+        <input id="animalPhoto" name="addAnimalPhoto" type="file" required accept="image/jpeg, image/png"/>
+      </div>
+      <div class="col-2">
+        <label for="animalAge">動物年齡期：</label>
+        <select id="animalAge" ng-model="addAnimalAge" ng-options="x for x in animalAgelist" class="form-control" required></select>
+      </div>
+      <div class="col-1 form-check">
+        <label for="isNeuter" class="form-check-label">已結紮</label>
+        <input id="isNeuter" class="form-check" type="checkbox" ng-model="addIsNeuter">
+      </div>
+      <div class="col-1 form-check">
+        <label for="isVaccine" class="form-check-label">已打預防針</label>
+        <input id="isVaccine" class="form-check" type="checkbox" ng-model="addIsVaccine">
+      </div>
+      <div class="col-2">
+        <label for="animalPersonality">動物個性：(非必填)</label>
+        <input id="animalPersonality" type="text" name="addAnimalPersonality" onblur="checkInput()"/>
+      </div>
+      <div class="col-2">
+        <label for="animalHealth">動物健康度：(非必填)</label>
+        <input id="animalHealth" type="text" name="addAnimalHealth" onblur="checkInput()"/>
+      </div>
+      <div class="col-2">
+        <label for="animalMemo">其他備註：(非必填)</label>
+        <textarea id="animalMemo" name="addAnimalMemo" rows="4" onblur="checkInput()"></textarea>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">上傳動物資料</button>
+  </form>
+</div>
+<!--上面是上傳一個動物的表單-->
+<!--下面是篩選一個動物的表單-->
+<div class="container mt-5" ng-controller="myCtrl_animalfilter">
+  <h2 class="mb-4">寵物領養篩選</h2>
+  <form id="petFilterForm" ng-submit="findAnimal()">
+    <div class="row mb-4">
+      <div class="col-4">
+        <label for="animalLocation">動物所在地：</label>
+        <select id="animalLocation" ng-model="findAnimalLocation" ng-options="x for (x,y) in citylist" class="form-control"></select>
+      </div>
+      <div class="col-4">
+        <label for="animalDist">動物所在鄉鎮區：</label>
+        <select id="animalDist" ng-model="findAnimalLocation.nowDist" ng-options="x for x in findAnimalLocation.distlist" class="form-control"></select>
+      </div>
+      <div class="col-2">
+        <label for="animalGender">動物性別：</label>
+        <select id="animalGender" ng-model="findAnimalGender" ng-options="x for x in animalGenderlist" class="form-control"></select>
+      </div>
+      <div class="col-2">
+        <label for="animalType">動物種類：</label>
+        <select id="animalType" ng-model="findAnimalType" ng-options="x for x in animalTypelist" class="form-control"></select>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-4">
+        <label for="animalSize">動物體型：</label>
+        <select id="animalSize" ng-model="findAnimalSize" ng-options="x for x in animalSizelist" class="form-control"></select>
+      </div>
+      <div class="col-4">
+        <label for="animalAge">動物年齡期：</label>
+        <select id="animalAge" ng-model="findAnimalAge" ng-options="x for x in animalAgelist" class="form-control"></select>
+      </div>
+      <div class="col-2  form-check">
+        <label for="isNeuter" class="form-check-label">已結紮</label>
+        <input id="isNeuter" class="form-check" type="checkbox" ng-model="findIsNeuter">
+      </div>
+      <div class="col-2 form-check">
+        <label for="isVaccine" class="form-check-label">已打預防針</label>
+        <input id="isVaccine" class="form-check" type="checkbox" ng-model="findIsVaccine">
+      </div>
+    </div>
+    <div class="button-group">
+    <button type="submit" class="btn btn-primary">送出篩選</button></div>
+  </form>
+  
+</div>
+<!--  日期選擇器模板(需搭配分離的.js)，供參考
+    <div class="col-3 form-group">
+      <label for="startDate">服務開始日期：</label>
+      <input id="startDate" type="text" name="startDate">
+    </div>
+-->
+<!--下面是AI生成的參考用程式碼語法，供參考
+  <div class="row">
+    <div class="col-4 mb-3">
+      <label for="location">所在地:</label>
+      <select class="form-control" id="location">
+        <option value="">不限區域</option>
+        <option value="taipei">台北市</option>
+        <option value="newtaipei">新北市</option>
+        <-- 加入其他20個縣市 ->
+      </select>
+    </div>
+    <div class="col-4 mb-3">
+      <label for="gender">寵物性別:</label>
+      <select class="form-control" id="gender">
+        <option value="">不限性別</option>
+        <option value="male">公</option>
+        <option value="female">母</option>
+      </select>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="type">寵物種類:</label>
+      <select class="form-control" id="type">
+        <option value="">不限種類</option>
+        <option value="cat">貓</option>
+        <option value="dog">狗</option>
+        <option value="other">其他</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <label for="size">寵物體型:</label>
+      <select class="form-control" id="size">
+        <option value="large">大型</option>
+        <option value="medium">中型</option>
+        <option value="small">小型</option>
+      </select>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="birthYear">寵物西元出生年:</label>
+      <input type="number" class="form-control" id="birthYear" min="2000" max="2024">
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="neutered">寵物是否結紮:</label>
+      <select class="form-control" id="neutered">
+        <option value="yes">已結紮</option>
+        <option value="no">未結紮</option>
+        <option value="unknown">不確定</option>
+      </select>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">送出篩選</button>
+-->
+<div class="container mt-5 mb-5">
+  <h3>篩選結果</h3>
+    | <a ng-click="editEmployee( employee )" class="btn btn-info">我上傳的動物列表</a>
+    | <a ng-click="removeEmployee( employee )" class="btn btn-info">審核領養者資訊</a>
+    | <a ng-click="removeEmployee2( employee )" class="btn btn-info">我的領養申請列表</a>
+  <div class="row">
+    <div class="col-3">
+      <div class="card"><!--ng-repeat="getAnimal in animals"-->
+        <img class="card-img-top" src="./images/img7.jpg" alt="Card image">
+        <div class="card-body">
+          <h5 class="card-title">{{ getAnimal.animalName }}</h5>
+          <p class="card-text">
+            種類:{{ getAnimal.animalType }}<br>
+            性別:{{ getAnimal.animalGender }}<br>
+            地點:{{ getAnimal.animalLocation }}<br>
+            體型:{{ getAnimal.animalSize }}<br>
+          </p>
+          <a href="#" class="btn btn-primary">詳細</a>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </div>
+
+
+    <table class="table table-striped">
+      <thead><tr><th>First Name<th>Last Name<th>Email<th>Actions</tr>
+      <tr ng-repeat="x in animals">
+        <td>{{ employee.firstName }}</td>
+        <td>{{ employee.lastName }}</td>
+        <td>{{ employee.email }}</td>
+        <td><a ng-click="editEmployee( employee )" class="button">Edit</a> | <a ng-click="removeEmployee( employee )" class="button">Remove</a></td>
+      </tr>
+    </table>
+    
+    
+    
+    
+    
+    
+    <table class="table table-striped">
+      <thead><tr><th>名稱<th>種類<th>性別<th>體型<th>出生年<th>是否結紮<th>所在地</tr>
+      <tbody id="petResults">
+        <!-- 這裡將通過JavaScript動態填充寵物數據 -->
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+<!--下面是來自Jack首頁的footer-->
+<footer>
+  <div class="container py-4 py-lg-5">
+    <div class="row row-cols-2 row-cols-md-4">
+      <div class="col-12 col-md-3">
+        <div class="fw-bold d-flex align-items-center mb-2">
+          <span><span style="font-weight: normal !important; color: rgb(0, 0, 0);">TailoredPaws 量身爪印</span></span>
+        </div>
+        <p class="text-muted">Java雲端開發實務班第一組作品</p>
+      </div>
+        <div class="col-sm-4 col-md-3 text-lg-start d-flex flex-column">
+          <h3 class="fs-6 fw-bold">商品服務</h3>
+          <ul class="list-unstyled">
+            <li><a href="#">寵物服務</a></li>
+            <li><a href="#">申請小幫手</a></li>
+            <li><a href="#">送養/領養</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-4 col-md-3 text-lg-start d-flex flex-column">
+          <h3 class="fs-6 fw-bold">關於我們</h3>
+          <ul class="list-unstyled">
+            <li><a href="#"><span style="color: var(--bs-secondary-color);">團隊介紹</span></a></li>
+            <li><a href="#">團隊介紹</a></li>
+            <li><a href="#">團隊介紹</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-4 col-md-3 text-lg-start d-flex flex-column">
+          <h3 class="fs-6 fw-bold">平台歷史</h3>
+          <ul class="list-unstyled">
+            <li><a href="#"><span style="color: rgb(18, 22, 67);">平台歷史</span></a></li>
+            <li><a href="#"><span style="color: rgb(18, 22, 67);">平台歷史</span></a></li>
+            <li><a href="#"><span style="color: rgb(18, 22, 67);">平台歷史</span></a></li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+      <div class="text-muted d-flex justify-content-between align-items-center pt-3">
+        <p class="mb-0">Copyright © 2024&nbsp;<span style="color: rgb(0, 0, 0);">TailoredPaws 量身爪印</span></p>
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-facebook">
+            <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"></path>
+          </svg></li>
+          <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-twitter">
+            <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15"></path>
+          </svg></li>
+          <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-instagram">
+            <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"></path>
+          </svg></li>
+        </ul>
+      </div>
+  </div>
+</footer>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/js/aos.min.js"></script>
+<script src="assets/js/bs-init.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="https://cdn.rawgit.com/digistate/resouces/master/multipleFilterMasonry.js"></script>
+<script src="https://cdn.rawgit.com/desandro/masonry/master/dist/masonry.pkgd.min.js"></script>
+<script src="assets/js/--mp---Masonry-Gallery-with-Loader-untitled.js"></script>
+<script src="assets/js/Simple-Slider-swiper-bundle.min.js"></script>
+<script src="assets/js/Simple-Slider.js"></script>
+<script src="assets/js/startup-modern.js"></script>
+<!--上面是來自Jack首頁的footer-->
+
+
+
+    <script>
+      $(document).ready(function() {
+        $('#petFilterForm').submit(function(e) {
+          e.preventDefault();
+          // 這裡應該發送AJAX請求到後端API
+          // 為了示例，我們將直接填充一些模擬數據
+          var mockData = [
+            {name: "小花", type: "貓", gender: "母", size: "小型", birthYear: 2022, neutered: "已結紮", location: "台北市"},
+            {name: "大黃", type: "狗", gender: "公", size: "中型", birthYear: 2020, neutered: "未結紮", location: "新北市"},
+            {name: "胖胖", type: "貓", gender: "公", size: "大型", birthYear: 2019, neutered: "已結紮", location: "台中市"}
+          ];
+          
+          var resultsHtml = mockData.map(function(pet) {
+            return `<tr>
+              <td>${pet.name}</td>
+              <td>${pet.type}</td>
+              <td>${pet.gender}</td>
+              <td>${pet.size}</td>
+              <td>${pet.birthYear}</td>
+              <td>${pet.neutered}</td>
+              <td>${pet.location}</td>
+            </tr>`;
+          }).join('');
+          
+          $('#petResults').html(resultsHtml);
+        });
+      });
+    </script>
+  </body>
+  </html>

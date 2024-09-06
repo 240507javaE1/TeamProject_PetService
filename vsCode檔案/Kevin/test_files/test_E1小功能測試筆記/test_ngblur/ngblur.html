@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AngularJS Check Input Example</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body ng-controller="myCtrl">
+  <div class="container mt-4">
+    <input type="text" class="needcheck" ng-blur="checkInput()" placeholder="Input 1">
+    <input type="text" class="needcheck" ng-blur="checkInput()" placeholder="Input 2">
+    <input type="text" class="needcheck" ng-blur="checkInput()" placeholder="Input 3">
+    <textarea class="needcheck" ng-blur="checkInput()" placeholder="Textarea"></textarea>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script>
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope, $timeout) {
+      $scope.checkInput = function() {
+        $timeout(function() {
+          const inputs = document.querySelectorAll('.needcheck');
+          inputs.forEach(e => {
+            if (e.value.trim() === '') {
+              e.value = '未輸入字詞';
+            }
+          });
+        });
+      };
+    });
+  </script>
+</body>
+</html>

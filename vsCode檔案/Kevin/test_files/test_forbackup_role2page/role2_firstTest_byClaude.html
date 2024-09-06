@@ -1,0 +1,136 @@
+<!DOCTYPE html><html>
+    <head>
+        <meta charset="utf-8">  <title>角色2頁面 Example</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+      </head>
+    <body>
+
+    <div class="container mt-5">
+      <h2 class="mb-4">寵物領養篩選</h2>
+      <form id="petFilterForm">
+        <div class="row">
+          <div class="col-4">
+            <label for="locate">所在地:</label>
+            <select id="locate" ng-model="nowCity" ng-options="y as y for (x,y) in citylist"></select>
+          </div>
+          <div class="col-4">
+            <label for="locate">所在地:</label>
+            <select id="locate" ng-model="nowCity" ng-options="y as y.name for (x,y) in citylist"></select>
+          </div>
+
+
+
+
+
+
+
+
+
+
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="location">所在地:</label>
+            <select class="form-control" id="location">
+              <option value="">不限區域</option>
+              <option value="taipei">台北市</option>
+              <option value="newtaipei">新北市</option>
+              <!-- 加入其他20個縣市 -->
+            </select>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="gender">寵物性別:</label>
+            <select class="form-control" id="gender">
+              <option value="">不限性別</option>
+              <option value="male">公</option>
+              <option value="female">母</option>
+            </select>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="type">寵物種類:</label>
+            <select class="form-control" id="type">
+              <option value="">不限種類</option>
+              <option value="cat">貓</option>
+              <option value="dog">狗</option>
+              <option value="other">其他</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="size">寵物體型:</label>
+            <select class="form-control" id="size">
+              <option value="large">大型</option>
+              <option value="medium">中型</option>
+              <option value="small">小型</option>
+            </select>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="birthYear">寵物西元出生年:</label>
+            <input type="number" class="form-control" id="birthYear" min="2000" max="2024">
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="neutered">寵物是否結紮:</label>
+            <select class="form-control" id="neutered">
+              <option value="yes">已結紮</option>
+              <option value="no">未結紮</option>
+              <option value="unknown">不確定</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">送出篩選</button>
+      </form>
+  
+      <div class="mt-5">
+        <h3>篩選結果</h3>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>名稱</th>
+              <th>種類</th>
+              <th>性別</th>
+              <th>體型</th>
+              <th>出生年</th>
+              <th>是否結紮</th>
+              <th>所在地</th>
+            </tr>
+          </thead>
+          <tbody id="petResults">
+            <!-- 這裡將通過JavaScript動態填充寵物數據 -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+    <script>
+      $(document).ready(function() {
+        $('#petFilterForm').submit(function(e) {
+          e.preventDefault();
+          // 這裡應該發送AJAX請求到後端API
+          // 為了示例，我們將直接填充一些模擬數據
+          var mockData = [
+            {name: "小花", type: "貓", gender: "母", size: "小型", birthYear: 2022, neutered: "已結紮", location: "台北市"},
+            {name: "大黃", type: "狗", gender: "公", size: "中型", birthYear: 2020, neutered: "未結紮", location: "新北市"},
+            {name: "胖胖", type: "貓", gender: "公", size: "大型", birthYear: 2019, neutered: "已結紮", location: "台中市"}
+          ];
+          
+          var resultsHtml = mockData.map(function(pet) {
+            return `<tr>
+              <td>${pet.name}</td>
+              <td>${pet.type}</td>
+              <td>${pet.gender}</td>
+              <td>${pet.size}</td>
+              <td>${pet.birthYear}</td>
+              <td>${pet.neutered}</td>
+              <td>${pet.location}</td>
+            </tr>`;
+          }).join('');
+          
+          $('#petResults').html(resultsHtml);
+        });
+      });
+    </script>
+  </body>
+  </html>

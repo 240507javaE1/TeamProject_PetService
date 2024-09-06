@@ -1,0 +1,37 @@
+<!-- app.component.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Angular Checkbox Example</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <h3>Angular Checkbox Example</h3>
+    <form [formGroup]="form">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" formControlName="option1">
+        <label class="form-check-label">
+          選項 1
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" formControlName="option2">
+        <label class="form-check-label">
+          選項 2
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" formControlName="option3">
+        <label class="form-check-label">
+          選項 3
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary mt-3">提交</button>
+    </form>
+  </div>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

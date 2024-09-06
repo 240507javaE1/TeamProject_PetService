@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>台灣縣市篩選頁面</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/angular.js/1.8.1/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+  <div class="row">
+    <div class="col-4">
+      <p>選擇篩選項目-縣市:</p>
+      <select ng-model="selectedCity" ng-options="city as city.name for (x, city) in citys"></select>
+    </div>
+    <div class="col-4">
+      <p>選擇篩選項目-鄉鎮區:</p>
+      <select ng-model="selectedCity.selectedDist" ng-options="dist for dist in selectedCity.districts"></select>
+    </div>
+  </div>
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+  $scope.citys = {
+    'taipei': {
+      name: '台北市',
+      districts: ['中正區','大同區','中山區','萬華區','信義區','松山區','大安區','南港區','北投區','內湖區','士林區','文山區'],
+      selectedDist: '中正區'
+    },
+    'newTaipei': {
+      name: '新北市',
+      districts: ['板橋區','新莊區','泰山區','林口區','淡水區','金山區','八里區','萬里區','石門區','三芝區','瑞芳區','汐止區','平溪區','貢寮區','雙溪區','深坑區','石碇區','新店區','坪林區','烏來區','中和區','永和區','土城區','三峽區','樹林區','鶯歌區','三重區','蘆洲區','五股區'],
+      selectedDist: '板橋區'
+    },
+    'keelung': {
+      name: '基隆市',
+      districts: ['仁愛區','中正區','信義區','中山區','安樂區','暖暖區','七堵區'],
+      selectedDist: '仁愛區'
+    }
+  };
+
+  $scope.selectedCity = $scope.citys.taipei;
+});
+</script>
+
+</body>
+</html>
